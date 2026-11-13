@@ -43,20 +43,27 @@ def return_tool() -> dict:
 
 
 class InvestigatorSurface:
-    """Reads, and a return the coordinator checks against the contract before it acts."""
+    """Reads of its own issue and the code, and a return the coordinator checks against the
+    contract before it acts. After `max_calls` reads, the return is the only tool offered:
+    the stopping rule is in code, not in the prompt."""
 
-    def __init__(self, registry, worker_id: str, coordinator, *, stopped=None):
+    def __init__(self, registry, worker_id: str, coordinator, issue: int, *, max_calls: int, stopped=None):
         self.registry, self.worker_id, self.coordinator = registry, worker_id, coordinator
         self.allowed = {tool_for(r) for r in INVESTIGATOR_ROLES}
-        self.stopped = stopped
+        self.issue, self.max_calls, self.stopped = issue, max_calls, stopped
         self.calls = 0
         self.searched: list[str] = []
         self.accepted: dict | None = None
         self.returns = 0
 
     @property
+    def spent(self) -> bool:
+        return self.calls >= self.max_calls
+
+    @property
     def schemas(self) -> list[dict]:
-        return [s for s in self.registry.schemas if s["name"] in self.allowed] + [return_tool()]
+        reads = [] if self.spent else [s for s in self.registry.schemas if s["name"] in self.allowed]
+        return reads + [return_tool()]
 
     def _note(self, name: str, tool_input) -> None:
         """Count the call the way the trace records it: every call to a course tool, refused or not."""
@@ -73,15 +80,27 @@ class InvestigatorSurface:
     def call(self, name: str, tool_input, **kwargs) -> ToolResult:
         if name == RETURN_TOOL:
             return self._return(tool_input)
+        spent = self.spent
         self._note(name, tool_input)
         if self.stopped is not None and self.stopped.is_set():
             return refused("The coordinator stopped this worker. Make no more calls.")
         if self.accepted is not None:
             return refused("Your finding was accepted. Make no more calls: reply with the word done.")
+        if spent:
+            return refused(f"Your {self.max_calls} calls are spent. Call {RETURN_TOOL} now with your best answer, "
+                           "status candidate or out_of_budget, and what you did not search in not_searched.")
         if name not in self.allowed:
             return refused(f"{name} is not one of your tools. You may call only {sorted(self.allowed)} "
                            f"and {RETURN_TOOL}.")
-        return self.registry.call(name, tool_input, **kwargs)
+        if role_of(name) == "read_issue":
+            named = str((tool_input or {}).get(arg("read_issue", "number"), "")).strip().lower() \
+                if isinstance(tool_input, dict) else ""
+            if named != f"issue-{self.issue}":
+                return refused(f"You investigate only issue-{self.issue}, not {named or 'no issue'}.")
+        result = self.registry.call(name, tool_input, **kwargs)
+        if self.spent and not result.is_error:
+            result.content += (f"\n\n[That was your last call. Call {RETURN_TOOL} now with your best answer.]")
+        return result
 
     def _return(self, tool_input) -> ToolResult:
         if self.accepted is not None:

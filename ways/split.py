@@ -30,7 +30,8 @@ from split.roles import InvestigatorSurface, WriterSurface
 from ways.agent import disclosure_line
 
 INVESTIGATOR_SHARE, WRITER_SHARE, HELD_BACK = 0.60, 0.25, 0.15
-INVESTIGATOR_STEPS, WRITER_STEPS = 11, 6       # ten steps to a return, one to say done; three writes and room
+INVESTIGATOR_CALLS = 8                          # reads before the return is the only tool offered
+INVESTIGATOR_STEPS, WRITER_STEPS = 11, 6       # eight reads, a return, one re-ask, one to say done; three writes and room
 
 
 class Coordinator:
@@ -63,7 +64,8 @@ class Coordinator:
         for turn, (worker_id, share) in enumerate(attempts):
             worker = self.ctx.agent(worker_id, parent=COORDINATOR)
             stop = self.stops.setdefault(worker_id, threading.Event())
-            surface = InvestigatorSurface(self.ctx.tools, worker_id, self.agent, stopped=stop)
+            surface = InvestigatorSurface(self.ctx.tools, worker_id, self.agent, issue,
+                                          max_calls=INVESTIGATOR_CALLS, stopped=stop)
             self.wait(worker_id, "a finding", turn)
             run_loop(worker.client, surface, self.ctx.prompt("investigator.md"), f"Investigate issue #{issue}.",
                      Bounds(INVESTIGATOR_STEPS, int(self.per_issue * share), self.wall), worker.trace)
