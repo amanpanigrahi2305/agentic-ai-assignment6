@@ -69,7 +69,7 @@ A BATCH OF FIVE                (five lanes at the same time; no arrow between la
   - Single tasks: arm M uses approximately 1.3 times the tokens of arm S. The two arms pass approximately the same number of tasks (S approximately 12 of 18, M approximately 11 of 18). Arm S-plus passes at least as many tasks as arm M, approximately 12 of 18.
   - Batch tasks: arm M uses approximately 0.5 times the tokens of arm S. Arm M passes a few more (full tasks: S approximately 1 of 6, M approximately 2 of 6; issues: S approximately 18 of 30, M approximately 24 of 30). Arm S-plus passes as many tasks as arm M.
   - Decision that I expect: one agent for single issues. One agent for batches also, unless the split does better than arm S-plus at the same budget.
-  - Commit `<hash>` at `<time>` (write these after the commit).
+  - Commit `946e454` at 2026-11-12T20:50:56-06:00, on `main`, before any run of the split.
 
 ## Part B · The split
 
