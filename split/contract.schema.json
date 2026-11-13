@@ -1,0 +1,31 @@
+{
+  "title": "An investigator's return",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["result", "status", "searched", "not_searched", "calls_used", "could_not_determine"],
+  "properties": {
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "file", "evidence"],
+      "properties": {
+        "label": {"type": "string", "enum": ["bug", "feature", "question", "docs"],
+                  "description": "The one label for the issue."},
+        "file": {"type": "string",
+                 "description": "The one file most responsible, relative to the repository root, or none for a question."},
+        "evidence": {"type": "string",
+                     "description": "One or two sentences: what in that file explains the issue, and what to change there."}
+      }
+    },
+    "status": {"type": "string", "enum": ["found", "candidate", "out_of_budget"],
+               "description": "found: the file read explains the issue. candidate: the best answer, not confirmed. out_of_budget: steps ran short before a confirmed answer."},
+    "searched": {"type": "array", "items": {"type": "string"},
+                 "description": "Every search query sent and every path read, each once. Filled in by code from the worker's own tool calls."},
+    "not_searched": {"type": "array", "items": {"type": "string"},
+                     "description": "Places or leads the worker knows it did not look at."},
+    "calls_used": {"type": "integer",
+                   "description": "The worker's calls to the registry's tools before it returned. Filled in by code from its own tool calls."},
+    "could_not_determine": {"type": "array", "items": {"type": "string"},
+                            "description": "What the worker could not settle; an empty list when nothing."}
+  }
+}
