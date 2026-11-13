@@ -1,0 +1,212 @@
+{
+  "arms": {
+    "S": {
+      "single": {
+        "runs": 18,
+        "passes": 12,
+        "per_task": {
+          "one-4402": 2,
+          "one-4403": 0,
+          "one-4405": 2,
+          "one-4406": 3,
+          "one-4409": 2,
+          "one-4413": 3
+        },
+        "sweep_min": 3,
+        "sweep_max": 5,
+        "all_three": 2,
+        "mean_tokens": 43335,
+        "mean_wall_s": 9.2,
+        "issue_parts": [
+          12,
+          18
+        ]
+      },
+      "batch": {
+        "runs": 6,
+        "passes": 0,
+        "per_task": {
+          "batch-a": 0,
+          "batch-b": 0
+        },
+        "sweep_min": 0,
+        "sweep_max": 0,
+        "all_three": 0,
+        "mean_tokens": 297441,
+        "mean_wall_s": 38.2,
+        "issue_parts": [
+          22,
+          30
+        ]
+      }
+    },
+    "M": {
+      "single": {
+        "runs": 18,
+        "passes": 10,
+        "per_task": {
+          "one-4402": 1,
+          "one-4403": 0,
+          "one-4405": 3,
+          "one-4406": 3,
+          "one-4409": 0,
+          "one-4413": 3
+        },
+        "sweep_min": 3,
+        "sweep_max": 4,
+        "all_three": 3,
+        "mean_tokens": 27662,
+        "mean_wall_s": 10.6,
+        "issue_parts": [
+          10,
+          18
+        ]
+      },
+      "batch": {
+        "runs": 6,
+        "passes": 0,
+        "per_task": {
+          "batch-a": 0,
+          "batch-b": 0
+        },
+        "sweep_min": 0,
+        "sweep_max": 0,
+        "all_three": 0,
+        "mean_tokens": 146700,
+        "mean_wall_s": 14.1,
+        "issue_parts": [
+          20,
+          30
+        ]
+      }
+    },
+    "S_plus": {
+      "single": {
+        "runs": 18,
+        "passes": 14,
+        "per_task": {
+          "one-4402": 3,
+          "one-4403": 0,
+          "one-4405": 3,
+          "one-4406": 3,
+          "one-4409": 2,
+          "one-4413": 3
+        },
+        "sweep_min": 4,
+        "sweep_max": 5,
+        "all_three": 4,
+        "mean_tokens": 28384,
+        "mean_wall_s": 10.0,
+        "issue_parts": [
+          14,
+          18
+        ]
+      },
+      "batch": {
+        "runs": 6,
+        "passes": 0,
+        "per_task": {
+          "batch-a": 0,
+          "batch-b": 0
+        },
+        "sweep_min": 0,
+        "sweep_max": 0,
+        "all_three": 0,
+        "mean_tokens": 146986,
+        "mean_wall_s": 48.7,
+        "issue_parts": [
+          24,
+          30
+        ]
+      }
+    }
+  },
+  "multiplier": {
+    "single": 0.64,
+    "batch": 0.49
+  },
+  "splus_vs_m": {
+    "batch-a": {
+      "M_mean_tokens": 132557,
+      "S_plus_budget": [
+        132557
+      ],
+      "S_plus_mean_tokens": 131927,
+      "S_plus_over_M": 1.0
+    },
+    "batch-b": {
+      "M_mean_tokens": 160842,
+      "S_plus_budget": [
+        160842
+      ],
+      "S_plus_mean_tokens": 162045,
+      "S_plus_over_M": 1.01
+    },
+    "one-4402": {
+      "M_mean_tokens": 36199,
+      "S_plus_budget": [
+        36199
+      ],
+      "S_plus_mean_tokens": 36484,
+      "S_plus_over_M": 1.01
+    },
+    "one-4403": {
+      "M_mean_tokens": 22570,
+      "S_plus_budget": [
+        22570
+      ],
+      "S_plus_mean_tokens": 23284,
+      "S_plus_over_M": 1.03
+    },
+    "one-4405": {
+      "M_mean_tokens": 31903,
+      "S_plus_budget": [
+        31903
+      ],
+      "S_plus_mean_tokens": 32165,
+      "S_plus_over_M": 1.01
+    },
+    "one-4406": {
+      "M_mean_tokens": 20827,
+      "S_plus_budget": [
+        20827
+      ],
+      "S_plus_mean_tokens": 21743,
+      "S_plus_over_M": 1.04
+    },
+    "one-4409": {
+      "M_mean_tokens": 35134,
+      "S_plus_budget": [
+        35134
+      ],
+      "S_plus_mean_tokens": 36691,
+      "S_plus_over_M": 1.04
+    },
+    "one-4413": {
+      "M_mean_tokens": 19342,
+      "S_plus_budget": [
+        19342
+      ],
+      "S_plus_mean_tokens": 19939,
+      "S_plus_over_M": 1.03
+    }
+  },
+  "constants": [
+    {
+      "checks_sha": "55abcd67e6a3b208",
+      "model": "gpt-4.1-mini",
+      "reviewer": "scripted:approve-all",
+      "schemas_sha": "703c0002892f27ec",
+      "task_ids": [
+        "batch-a",
+        "batch-b",
+        "one-4402",
+        "one-4403",
+        "one-4405",
+        "one-4406",
+        "one-4409",
+        "one-4413"
+      ]
+    }
+  ]
+}
