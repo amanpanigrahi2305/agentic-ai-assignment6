@@ -1,23 +1,223 @@
 {
-  "gates": {"daily": ["pass", "pass", "fail", "not_reached"], "batch": ["pass", "pass", "pass", "pass"]},
-  "constants": {"model": null, "schemas_sha": null, "checks_sha": null, "reviewer": null, "task_ids": []},
-  "arms": {
-    "S": {"single": {"runs": 0, "passes": 0, "per_task": {}, "sweep_min": null, "sweep_max": null, "all_three": 0,
-                     "mean_tokens": null, "mean_wall_s": null},
-          "batch": {"runs": 0, "passes": 0, "per_task": {}, "sweep_min": null, "sweep_max": null, "all_three": 0,
-                    "mean_tokens": null, "mean_wall_s": null}},
-    "M": {"single": {"runs": 0, "passes": 0, "per_task": {}, "sweep_min": null, "sweep_max": null, "all_three": 0,
-                     "mean_tokens": null, "mean_wall_s": null},
-          "batch": {"runs": 0, "passes": 0, "per_task": {}, "sweep_min": null, "sweep_max": null, "all_three": 0,
-                    "mean_tokens": null, "mean_wall_s": null}},
-    "S_plus": {"single": {"runs": 0, "passes": 0, "per_task": {}, "sweep_min": null, "sweep_max": null, "all_three": 0,
-                          "mean_tokens": null, "mean_wall_s": null},
-               "batch": {"runs": 0, "passes": 0, "per_task": {}, "sweep_min": null, "sweep_max": null, "all_three": 0,
-                         "mean_tokens": null, "mean_wall_s": null}}
+  "gates": {
+    "daily": [
+      "pass",
+      "pass",
+      "fail",
+      "not_reached"
+    ],
+    "batch": [
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ]
   },
-  "multiplier": {"single": null, "batch": null},
-  "spend_check": {"single": {"spent_more": null, "spend_raises_score": null, "one_agent_as_well": null},
-                  "batch": {"spent_more": null, "spend_raises_score": null, "one_agent_as_well": null}},
-  "failures": [],
-  "decision": {"single": null, "batch": null, "revisit_condition": null}
+  "constants": {
+    "checks_sha": "55abcd67e6a3b208",
+    "model": "gpt-4.1-mini",
+    "reviewer": "scripted:approve-all",
+    "schemas_sha": "703c0002892f27ec",
+    "task_ids": [
+      "batch-a",
+      "batch-b",
+      "one-4402",
+      "one-4403",
+      "one-4405",
+      "one-4406",
+      "one-4409",
+      "one-4413"
+    ]
+  },
+  "arms": {
+    "S": {
+      "single": {
+        "runs": 18,
+        "passes": 12,
+        "per_task": {
+          "one-4402": 2,
+          "one-4403": 0,
+          "one-4405": 2,
+          "one-4406": 3,
+          "one-4409": 2,
+          "one-4413": 3
+        },
+        "sweep_min": 3,
+        "sweep_max": 5,
+        "all_three": 2,
+        "mean_tokens": 43335,
+        "mean_wall_s": 9.2
+      },
+      "batch": {
+        "runs": 6,
+        "passes": 0,
+        "per_task": {
+          "batch-a": 0,
+          "batch-b": 0
+        },
+        "sweep_min": 0,
+        "sweep_max": 0,
+        "all_three": 0,
+        "mean_tokens": 297441,
+        "mean_wall_s": 38.2
+      }
+    },
+    "M": {
+      "single": {
+        "runs": 18,
+        "passes": 10,
+        "per_task": {
+          "one-4402": 1,
+          "one-4403": 0,
+          "one-4405": 3,
+          "one-4406": 3,
+          "one-4409": 0,
+          "one-4413": 3
+        },
+        "sweep_min": 3,
+        "sweep_max": 4,
+        "all_three": 3,
+        "mean_tokens": 27662,
+        "mean_wall_s": 10.6
+      },
+      "batch": {
+        "runs": 6,
+        "passes": 0,
+        "per_task": {
+          "batch-a": 0,
+          "batch-b": 0
+        },
+        "sweep_min": 0,
+        "sweep_max": 0,
+        "all_three": 0,
+        "mean_tokens": 146700,
+        "mean_wall_s": 14.1
+      }
+    },
+    "S_plus": {
+      "single": {
+        "runs": 18,
+        "passes": 14,
+        "per_task": {
+          "one-4402": 3,
+          "one-4403": 0,
+          "one-4405": 3,
+          "one-4406": 3,
+          "one-4409": 2,
+          "one-4413": 3
+        },
+        "sweep_min": 4,
+        "sweep_max": 5,
+        "all_three": 4,
+        "mean_tokens": 28384,
+        "mean_wall_s": 10.0
+      },
+      "batch": {
+        "runs": 6,
+        "passes": 0,
+        "per_task": {
+          "batch-a": 0,
+          "batch-b": 0
+        },
+        "sweep_min": 0,
+        "sweep_max": 0,
+        "all_three": 0,
+        "mean_tokens": 146986,
+        "mean_wall_s": 48.7
+      }
+    }
+  },
+  "multiplier": {
+    "single": 0.64,
+    "batch": 0.49
+  },
+  "spend_check": {
+    "single": {
+      "spent_more": "no",
+      "spend_raises_score": "no",
+      "one_agent_as_well": "yes"
+    },
+    "batch": {
+      "spent_more": "no",
+      "spend_raises_score": "no",
+      "one_agent_as_well": "yes"
+    }
+  },
+  "failures": [
+    {
+      "run_id": "split-batch-a-s01-3cd2f9",
+      "anomaly": "none",
+      "mast": "task_verification"
+    },
+    {
+      "run_id": "split-batch-a-s02-e6b2c4",
+      "anomaly": "none",
+      "mast": "task_verification"
+    },
+    {
+      "run_id": "split-batch-a-s03-9f6246",
+      "anomaly": "none",
+      "mast": "task_verification"
+    },
+    {
+      "run_id": "split-batch-b-s01-b7873e",
+      "anomaly": "none",
+      "mast": "task_verification"
+    },
+    {
+      "run_id": "split-batch-b-s02-2a5077",
+      "anomaly": "none",
+      "mast": "task_verification"
+    },
+    {
+      "run_id": "split-batch-b-s03-a285f1",
+      "anomaly": "none",
+      "mast": "task_verification"
+    },
+    {
+      "run_id": "split-one-4402-s01-f40590",
+      "anomaly": "none",
+      "mast": "task_verification"
+    },
+    {
+      "run_id": "split-one-4402-s02-996507",
+      "anomaly": "none",
+      "mast": "task_verification"
+    },
+    {
+      "run_id": "split-one-4403-s01-641ce5",
+      "anomaly": "none",
+      "mast": "task_verification"
+    },
+    {
+      "run_id": "split-one-4403-s02-f72cbb",
+      "anomaly": "none",
+      "mast": "task_verification"
+    },
+    {
+      "run_id": "split-one-4403-s03-f51ed9",
+      "anomaly": "none",
+      "mast": "task_verification"
+    },
+    {
+      "run_id": "split-one-4409-s01-993d4d",
+      "anomaly": "none",
+      "mast": "system_design"
+    },
+    {
+      "run_id": "split-one-4409-s02-a887ba",
+      "anomaly": "none",
+      "mast": "task_verification"
+    },
+    {
+      "run_id": "split-one-4409-s03-441ee8",
+      "anomaly": "none",
+      "mast": "task_verification"
+    }
+  ],
+  "decision": {
+    "single": "single",
+    "batch": "single",
+    "revisit_condition": "Reopen for batches if, on a batch task set where each issue has its own test (for example, a failing test in fixtures/repo/test/ for each issue), the split passes more issues than one agent given the same spend (arm S-plus) in every one of three sweeps; or if RepoMind gets a stated time limit for a batch that one agent cannot meet (S-plus took 48.7 s; the split took 14.1 s)."
+  }
 }

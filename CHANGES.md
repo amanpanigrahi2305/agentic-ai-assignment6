@@ -28,3 +28,8 @@ Removals are logged like additions.
 - **Removed:** autonomous merge; pushes to a protected branch
 - **Constrained:** push_commit and post_comment by circumstance; every gated call to a person's answer, and no answer to a hold
 
+## Assignment 6
+- **Added:** Nothing.
+- **Removed:** Nothing.
+- **Constrained:** Multi-agent decomposition was evaluated against a single-agent approach. The split design was not merged. See `decisions/0006-topology.md`.
+
